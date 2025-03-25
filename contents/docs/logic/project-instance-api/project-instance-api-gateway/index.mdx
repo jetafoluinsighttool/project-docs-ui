@@ -1,0 +1,77 @@
+---
+title: API Gateway en la Project Instance API
+description: Detalles sobre la configuración del API Gateway y sus rutas.
+keywords: ["API Gateway", "AWS", "Serverless", "CORS", "JWT"]
+---
+
+# 🌐 API Gateway
+
+En la **Project Instance API**, se utiliza **API Gateway** de AWS para gestionar las solicitudes HTTP y dirigirlas a las funciones Lambda correspondientes. Esto permite desacoplar la lógica del backend y manejar autenticación, autorización y control de acceso.
+
+## ⚙ Configuración del API Gateway
+
+El API Gateway se configura para aceptar solicitudes desde distintos orígenes (**CORS habilitado**) y permite los siguientes métodos:
+✅ `GET`
+✅ `POST`
+✅ `PUT`
+
+Además, se definen encabezados permitidos como **Authorization** y **Content-Type** para garantizar la comunicación segura con los clientes.
+
+## 🔗 Integraciones con Funciones Lambda
+
+Cada ruta del API Gateway está vinculada con una función Lambda específica para procesar la solicitud. Las integraciones incluyen:
+
+- **ProjectInstanceLambda** ➝ `/project-instance`
+- **ModuleInstanceLambda** ➝ `/module-instance`
+- **SubModuleInstanceLambda** ➝ `/sub-module-instance`
+- **FeedbackInstanceLambda** ➝ `/feedback-instance`
+
+Cada una de estas integraciones permite operaciones CRUD sobre la base de datos **ProjectInstanceTable** en DynamoDB.
+
+## 🔑 Seguridad y Autenticación
+
+El acceso a la API está protegido mediante un **autorizer basado en JWT**, lo que garantiza que solo los usuarios autenticados puedan interactuar con las rutas definidas.
+
+## 🛤 Rutas Definidas
+
+### 📌 **Rutas de `ProjectInstance`**
+
+| Método         | Ruta                           | Descripción                                    |
+| -------------- | ------------------------------ | ---------------------------------------------- |
+| `GET` / `POST` | `/project-instance`            | Obtiene o crea una instancia de proyecto       |
+| `GET` / `PUT`  | `/project-instance/{one}`      | Consulta o actualiza una instancia de proyecto |
+| `GET`          | `/project-instance-last/{one}` | Recupera la última instancia de un proyecto    |
+| `GET`          | `/project-instance-all/{one}`  | Obtiene todas las instancias de un proyecto    |
+
+### 📌 **Rutas de `ModuleInstance`**
+
+| Método         | Ruta                           | Descripción                               |
+| -------------- | ------------------------------ | ----------------------------------------- |
+| `GET` / `POST` | `/module-instance`             | Obtiene o crea una instancia de módulo    |
+| `GET`          | `/module-instance/{one}`       | Consulta una instancia de módulo          |
+| `GET` / `PUT`  | `/module-instance/{one}/{two}` | Consulta o actualiza un módulo específico |
+| `GET`          | `/module-instance-all/{one}`   | Obtiene todas las instancias de un módulo |
+
+### 📌 **Rutas de `SubModuleInstance`**
+
+| Método         | Ruta                               | Descripción                                  |
+| -------------- | ---------------------------------- | -------------------------------------------- |
+| `GET` / `POST` | `/sub-module-instance`             | Obtiene o crea una instancia de submódulo    |
+| `GET`          | `/sub-module-instance/{one}`       | Consulta una instancia de submódulo          |
+| `GET` / `PUT`  | `/sub-module-instance/{one}/{two}` | Consulta o actualiza un submódulo específico |
+| `GET`          | `/sub-module-instance-all/{one}`   | Obtiene todas las instancias de un submódulo |
+
+### 📌 **Rutas de `FeedbackInstance`**
+
+| Método        | Ruta                             | Descripción                                 |
+| ------------- | -------------------------------- | ------------------------------------------- |
+| `POST`        | `/feedback-instance`             | Crea una nueva retroalimentación            |
+| `GET` / `PUT` | `/feedback-instance/{one}/{two}` | Consulta o actualiza un feedback específico |
+| `GET`         | `/feedback-instance-all/{one}`   | Obtiene todos los feedbacks relacionados    |
+
+## 🚀 Beneficios de la Implementación
+
+✅ **Escalabilidad:** API Gateway maneja tráfico sin necesidad de servidores adicionales.
+✅ **Autenticación integrada:** Uso de JWT para proteger las rutas.
+✅ **Flexibilidad:** Rutas bien definidas para operaciones específicas.
+✅ **Costos optimizados:** Solo se paga por las solicitudes procesadas.

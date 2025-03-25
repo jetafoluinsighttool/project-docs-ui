@@ -1,5 +1,83 @@
 ---
-title: title
-description: description
-keywords: []
+title: "Interfaz Principal – JET AFOLU Insight Tool"
+description: "Descripción detallada sobre la interfaz principal de la plataforma JET AFOLU Insight Tool, basada en Next.js, con un stack tecnológico moderno para garantizar rendimiento, escalabilidad y seguridad."
+keywords: "interfaz principal, JET AFOLU Insight Tool, Next.js, TypeScript, React, AWS Amplify, autenticación, seguridad, TailwindCSS, React Table, AWS API Gateway, Cognito"
 ---
+
+# 🖥️ Interfaz Principal – JET AFOLU Insight Tool
+
+La interfaz principal de **JET AFOLU Insight Tool** está diseñada para ofrecer una experiencia de usuario eficiente y adaptable, basada en **Next.js** y un ecosistema moderno de tecnologías frontend y backend.
+
+## 🚀 Tecnologías utilizadas
+
+La aplicación está construida con un stack moderno para garantizar rendimiento, seguridad y escalabilidad:
+
+### 🏗️ **Framework y Lenguajes**
+
+- **⚡ Next.js:** [nextjs.org](https://nextjs.org/) – Framework para SSR, SSG y optimización de rendimiento.
+- **📌 TypeScript:** [typescriptlang.org](https://www.typescriptlang.org/) – Tipado estático para mayor seguridad en el código.
+- **⚛️ React:** [react.dev](https://es.react.dev/) – Librería de componentes reutilizables y eficiente.
+
+### 🎨 **Estilos y Componentes UI**
+
+- **🎨 TailwindCSS:** [tailwindcss.com](https://tailwindcss.com/) – Estilización rápida y adaptable con clases utilitarias.
+- **💅 Emotion:** [emotion.sh](https://emotion.sh/docs/introduction) – Librería de estilos en línea con soporte para temas.
+- **🖌️ ShadCN UI:** [ui.shadcn.com](https://ui.shadcn.com/) – Librería de componentes accesibles y modernos.
+- **🖍️ Radix UI:** [radix-ui.com](https://www.radix-ui.com/) – Componentes accesibles para diálogos, menús, tooltips y más.
+
+### 📡 **Gestión de Estado y Datos**
+
+- **📦 Zustand:** [zustand-demo.pmnd.rs](https://zustand-demo.pmnd.rs/) – Gestión de estado ligera y eficiente.
+- **🔄 SWR:** [swr.vercel.app](https://swr.vercel.app/) – Manejo de datos remotos con revalidación automática.
+- **📊 React Table:** [tanstack.com/table](https://tanstack.com/table) – Gestión y renderizado de tablas con gran flexibilidad.
+
+### 🔐 **Autenticación y Seguridad**
+
+- **🛡️ AWS Amplify:** [aws.amazon.com/amplify](https://aws.amazon.com/amplify/) – Manejo de autenticación y autorización con Cognito.
+- **🔑 AWS Cognito SDK:** [npm aws-sdk](https://www.npmjs.com/package/@aws-sdk/client-cognito-identity-provider) – Interacción directa con AWS Cognito para autenticación segura.
+
+---
+
+## 🌍 Conexión con el Backend
+
+La aplicación consume datos y funcionalidades de diversas APIs backend que manejan la lógica del sistema. La comunicación se realiza a través de **AWS API Gateway** y **Lambda**, con autenticación vía **Cognito**.
+
+📡 **Principales APIs conectadas:**
+
+- **🛠️ `project-instance-api`** → Consulta y envío de respuestas de usuarios.
+- **🗂️ `project-template-api`** → Consulta de preguntas en múltiples idiomas desde DynamoDB.
+- **📊 `project-reviewer-api`** → Generación de métricas y análisis de respuestas.
+- **🔐 `project-auth-api`** → Gestión de autenticación y autorización.
+
+La aplicación utiliza **Axios** y **SWR** para manejar las peticiones HTTP de forma eficiente.
+
+---
+
+## 🏗️ Estructura de Layouts y Perfiles
+
+La interfaz está diseñada para adaptarse a diferentes tipos de usuarios dentro de la plataforma. Dependiendo del perfil del usuario, la aplicación carga distintos layouts y permisos.
+
+👤 **Tipos de Perfiles:**
+
+- **Administrador:** Acceso total, gestión de usuarios y configuración del sistema.
+- **Revisor:** Puede analizar respuestas y generar métricas.
+- **Contribuidor:** Envía respuestas y consulta preguntas dentro del sistema.
+
+📌 **La interfaz se adapta dinámicamente según los permisos del usuario, asegurando una experiencia personalizada y segura.**
+
+---
+
+## 📦 Otras Librerías Clave
+
+Además de las tecnologías mencionadas, el sistema incorpora herramientas para mejorar la usabilidad y experiencia del usuario:
+
+- **📈 Recharts** – Gráficos interactivos y visualización de datos.
+- **🎬 Framer Motion** – Animaciones fluidas y transiciones UI.
+- **📅 React Day Picker** – Manejo de fechas y calendarios.
+- **📜 Lucide React** – Íconos modernos y personalizables.
+- **🔄 Next HTTP Proxy Middleware** – Proxy para gestionar API externas en Next.js.
+- **⚡ UUID** – Generación de identificadores únicos.
+
+---
+
+📌 **Gracias a este ecosistema tecnológico, la interfaz principal de JET AFOLU Insight Tool ofrece una plataforma robusta, escalable y optimizada para manejar grandes volúmenes de datos sin comprometer el rendimiento.** 🚀

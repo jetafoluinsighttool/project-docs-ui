@@ -1,0 +1,39 @@
+---
+title: Project Instance API - Seguridad y Autenticación
+description: Mecanismos de autenticación y autorización en la Project Instance API utilizando Amazon Cognito.
+keywords: ["AWS", "Cognito", "JWT", "Autenticación", "Seguridad"]
+---
+
+# 🔒 Seguridad y Autenticación
+
+La **Project Instance API** implementa un sistema de autenticación robusto basado en **Amazon Cognito**, asegurando que solo usuarios autorizados puedan acceder a los recursos de la API.
+
+## 🛡 Mecanismo de Autenticación
+
+Se utiliza un **JWT Authorizer** (`HttpJwtAuthorizer`), que valida los tokens de acceso de los usuarios antes de permitirles interactuar con los endpoints de la API.
+
+### 🔹 **Flujo de Autenticación**
+
+1. **Generación del Token**:
+
+   - Los usuarios inician sesión en Cognito y reciben un **JSON Web Token (JWT)**.
+
+2. **Validación del Token**:
+
+   - El token JWT se extrae del encabezado `Authorization` de cada solicitud.
+   - Se verifica que el token provenga del **User Pool** correcto en Cognito.
+   - Solo los clientes registrados en el **User Pool** pueden acceder a la API.
+
+3. **Autorización de Solicitudes**:
+   - Si el token es válido, el usuario puede interactuar con los recursos protegidos.
+   - En caso contrario, la solicitud es rechazada.
+
+## 🔑 Beneficios del Enfoque
+
+✅ Seguridad reforzada mediante verificación de identidad en Cognito.
+✅ Protección contra accesos no autorizados gracias a la validación de tokens JWT.
+✅ Gestión centralizada de usuarios y permisos sin necesidad de credenciales manuales.
+
+Este mecanismo garantiza que únicamente los usuarios autenticados puedan enviar respuestas y consultar información dentro del sistema, protegiendo la integridad de los datos.
+
+🔹 **Continúa con la siguiente sección:** [Almacenamiento de Datos]

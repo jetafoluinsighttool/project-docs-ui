@@ -1,0 +1,59 @@
+---
+title: Project Instance API - Almacenamiento de Datos
+description: Estrategia de almacenamiento de respuestas en Amazon DynamoDB para la Project Instance API.
+keywords:
+  ["AWS", "DynamoDB", "Base de datos", "Índices Secundarios", "Escalabilidad"]
+---
+
+# 📦 Almacenamiento de Datos
+
+Para gestionar las respuestas de los usuarios de forma eficiente, la **Project Instance API** utiliza **Amazon DynamoDB**, una base de datos NoSQL de alto rendimiento.
+
+## 🗂 Estructura de la Tabla Principal
+
+La tabla principal, **`ProjectInstanceTable`**, almacena las respuestas de los usuarios con una estructura optimizada para escalabilidad y consultas rápidas.
+
+- **Partition Key (`pk`)**: Identificador único de cada registro.
+- **Sort Key (`sk`)**: Permite organizar los datos dentro de cada partición.
+- **Billing Mode**: Se utiliza **PAY_PER_REQUEST**, ajustando costos según el uso real.
+- **Removal Policy**:
+  - En **Producción**, los datos se **retienen** (`RETAIN`) para evitar pérdidas de información.
+  - En **Staging**, los datos pueden **eliminarse** (`DESTROY`) al eliminar el stack, facilitando pruebas sin acumulación innecesaria.
+
+## 📊 Índices Secundarios Globales (GSI)
+
+Se implementan **cuatro índices secundarios globales** para optimizar consultas bajo diferentes criterios:
+
+### 🔹 **FirstGlobalSecondaryIndex**
+
+- **Partition Key:** `firstGlobalSecondaryIndexPk`
+- **Sort Key:** `firstGlobalSecondaryIndexSk`
+- **Uso:** Permite consultar datos por una clave alternativa.
+
+### 🔹 **SecondGlobalSecondaryIndex**
+
+- **Partition Key:** `secondGlobalSecondaryIndexPk`
+- **Sort Key:** `secondGlobalSecondaryIndexSk`
+- **Uso:** Facilita consultas basadas en otro conjunto de claves.
+
+### 🔹 **ThirdGlobalSecondaryIndex**
+
+- **Partition Key:** `thirdGlobalSecondaryIndexPk`
+- **Sort Key:** `thirdGlobalSecondaryIndexSk`
+- **Uso:** Proporciona flexibilidad adicional para acceder a los datos.
+
+### 🔹 **EntityTypeUpdatedAtIndex**
+
+- **Partition Key:** `entityType`
+- **Sort Key:** `updatedAt`
+- **Uso:** Permite buscar registros filtrando por tipo de entidad y ordenando por fecha de actualización.
+
+## ⚡ Beneficios del Enfoque
+
+✅ Consultas eficientes sin afectar el rendimiento de la tabla principal.
+✅ Escalabilidad optimizada con un esquema de almacenamiento flexible.
+✅ Reducción de costos mediante facturación basada en demanda (**PAY_PER_REQUEST**).
+
+Este modelo de almacenamiento asegura rapidez y estabilidad en la gestión de datos dentro del sistema.
+
+🔹 **Continúa con la siguiente sección:** [Funciones Lambda](./project-instance-lambdas.md)

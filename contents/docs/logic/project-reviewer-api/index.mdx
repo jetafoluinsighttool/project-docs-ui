@@ -1,5 +1,69 @@
 ---
-title: title
-description: description
-keywords: []
+title: "Guía de la API Project Reviewer"
+description: "Una explicación detallada sobre la arquitectura y componentes de la API Project Reviewer, que maneja la integración de métricas, autenticación y funciones Lambda."
+keywords:
+  [
+    "API Project Reviewer",
+    "Arquitectura",
+    "Seguridad",
+    "Autenticación",
+    "Funciones Lambda",
+    "API Gateway",
+  ]
 ---
+
+# Guía de la API Project Reviewer
+
+La API Project Reviewer es una solución robusta que integra diversos servicios de AWS, como Lambda, API Gateway y Cognito, para proporcionar funcionalidades que permiten gestionar métricas y datos relacionados con proyectos. A continuación, se desglosan los componentes clave y su rol dentro de la arquitectura de la API.
+
+## 1️⃣ **Arquitectura**
+
+La arquitectura de la API Project Reviewer está basada en AWS y se estructura alrededor de varios servicios integrados. El corazón de la API reside en un conjunto de **rutas HTTP** definidas a través de API Gateway, que se conectan a diversas funciones Lambda para procesar la lógica de negocio. Estas funciones Lambda se encargan de manejar operaciones relacionadas con proyectos, módulos y métricas.
+
+Cada función Lambda se despliega con una configuración específica para garantizar que las solicitudes de la API sean procesadas de manera eficiente y escalable. Además, la API se organiza en distintos entornos o etapas (`stage`), permitiendo la implementación de diferentes configuraciones para cada ambiente, como desarrollo, pruebas o producción.
+
+## 2️⃣ **Seguridad y Autenticación**
+
+La seguridad es un aspecto clave de esta API. Para garantizar que solo los usuarios autorizados accedan a los recursos, se utiliza **Amazon Cognito** para la autenticación y autorización de los usuarios.
+
+La autenticación se maneja a través de un **JWT Authorizer** que valida los tokens JWT proporcionados en los encabezados de las solicitudes. Esto asegura que solo los usuarios con credenciales válidas, como las proporcionadas por un pool de usuarios de Cognito, puedan acceder a las rutas protegidas de la API.
+
+Además, cada ruta de la API está protegida con este authorizer, lo que refuerza la seguridad y garantiza que el acceso a las funcionalidades de la API sea gestionado de manera controlada.
+
+## 3️⃣ **Funciones Lambda**
+
+Las **funciones Lambda** son componentes centrales en la arquitectura de esta API, ya que son responsables de procesar las solicitudes y generar las respuestas necesarias. Cada función Lambda está diseñada para ejecutar una tarea específica, como la obtención de métricas de proyectos o la gestión de instancias de módulos.
+
+En el caso de esta API, se utiliza una función Lambda llamada **MetricsFunction**, que tiene acceso a diversos servicios y API dentro de la infraestructura, como la API del template de proyecto, la API de instancias de proyectos y la API de autenticación.
+
+Las funciones Lambda son configuradas con un **tiempo de espera (timeout)** para asegurar que no se queden en ejecución durante demasiado tiempo. Esto permite optimizar el uso de recursos y garantizar que las respuestas a las solicitudes sean rápidas y eficientes.
+
+## 4️⃣ **API Gateway**
+
+El **API Gateway** actúa como la puerta de enlace entre los usuarios y las funciones Lambda. A través de este servicio, las solicitudes HTTP entrantes se rutean a las funciones correspondientes, cada una asociada a una ruta específica.
+
+A continuación, se detallan las principales rutas configuradas en la API Gateway para **Project Reviewer API**:
+
+### 📌 **Rutas de `ProjectReviewer`**
+
+| Método | Ruta                         | Descripción                                                         |
+| ------ | ---------------------------- | ------------------------------------------------------------------- |
+| `GET`  | `/metrics-count/{one}`       | Obtiene el conteo de métricas relacionadas con el proyecto.         |
+| `GET`  | `/project-instance/{one}`    | Recupera información sobre una instancia específica de un proyecto. |
+| `GET`  | `/module-instance/{one}`     | Permite obtener detalles sobre una instancia de módulo.             |
+| `GET`  | `/sub-module-instance/{one}` | Obtiene datos de una subinstancia dentro de un módulo.              |
+| `GET`  | `/feedback-instance/{one}`   | Proporciona retroalimentación relacionada con una instancia.        |
+
+Cada una de estas rutas está asociada con una **función Lambda**, que procesa la solicitud y devuelve la respuesta correspondiente. Para garantizar que solo los usuarios autenticados puedan acceder a estas rutas, cada ruta está protegida mediante el **JWT Authorizer**.
+
+Además, el **API Gateway** maneja las configuraciones de **CORS** (Cross-Origin Resource Sharing), permitiendo que las solicitudes se realicen desde diferentes dominios, facilitando la correcta comunicación entre los clientes y la API.
+
+El API Gateway proporciona también la **URL de la API**, que sirve como punto de entrada para las solicitudes y facilita el acceso a los usuarios y sistemas que necesiten interactuar con la API Project Reviewer.
+
+---
+
+## Conclusión
+
+La API Project Reviewer integra varios servicios de AWS para ofrecer una solución escalable y segura para la gestión de proyectos. La arquitectura basada en funciones Lambda y el uso de API Gateway para la gestión de rutas proporciona flexibilidad y eficiencia, mientras que el sistema de autenticación basado en Cognito asegura que solo los usuarios autorizados puedan acceder a los recursos. La correcta configuración de cada componente es clave para el funcionamiento óptimo de la API.
+
+¡Ahora tienes una visión completa de la API Project Reviewer y sus componentes!

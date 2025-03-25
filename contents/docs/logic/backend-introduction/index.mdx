@@ -1,5 +1,48 @@
 ---
-title: title
-description: description
-keywords: []
+title: "Introducción al Backend"
+description: "Descripción detallada sobre la arquitectura del backend, despliegue, entornos, y los proyectos principales que componen el sistema. Desarrollado con AWS CDK y Node.js."
+keywords: "backend, AWS CDK, Node.js, infraestructura escalable, despliegue, staging, producción, arquitectura, proyectos principales, autenticación, autorización"
 ---
+
+# 🏗 Introducción al Backend
+
+El backend de la plataforma está desarrollado utilizando **AWS CDK** y **Node.js**, permitiendo una infraestructura escalable y modular.
+
+## 🚀 Despliegue
+
+Para desplegar el backend, es necesario contar con un usuario con los permisos adecuados. Se recomienda que cada desarrollador tenga su propio usuario con permisos independientes, lo que facilita la trazabilidad y el control de cambios.
+
+## 🌍 Entornos
+
+El backend está segmentado en dos entornos principales:
+
+- **Staging**: Utilizado para pruebas y validación de cambios sin afectar la operación en producción.
+- **Production**: Entorno estable donde se ejecutan los servicios en vivo.
+
+Esta separación permite asignar recursos según las necesidades de cada entorno, asegurando que las pruebas no impacten la estabilidad del sistema.
+
+## 🔹 Arquitectura de Proyectos
+
+El backend se compone de **cuatro proyectos principales**, cada uno con una función específica dentro del sistema:
+
+### 📌 **Template**
+
+Almacena todas las preguntas y respuestas organizadas por módulos.
+
+### 📌 **Instance**
+
+Registra todas las respuestas de los usuarios a las preguntas almacenadas en _Template_.
+
+### 📌 **Reviewer**
+
+Proporciona métricas y análisis basados en los datos almacenados en _Instance_ y _Template_, permitiendo evaluar el rendimiento y los resultados.
+
+### 📌 **Auth**
+
+Maneja la autenticación y autorización, incluyendo:
+
+- Inicio de sesión.
+- Gestión de perfiles de usuario.
+- Almacenamiento de información clave de los usuarios.
+
+🔹 **Con esta arquitectura, el sistema garantiza escalabilidad, seguridad y un control eficiente de la información.**

@@ -1,0 +1,63 @@
+---
+title: API Gateway en la Project Instance API
+description: Creación de un API Gateway con múltiples integraciones Lambda y rutas personalizadas para templates.
+keywords:
+  ["API Gateway", "Lambda", "HTTP API", "Rutas", "CORS", "Autenticación"]
+---
+
+# 🚀 Configuración del API Gateway
+
+El **API Gateway** de **Project Template** facilita la gestión de rutas HTTP, proporcionando integraciones con Lambda para el manejo de solicitudes asociadas a templates de proyectos, módulos y submódulos.
+
+## 🌐 API Gateway y CORS
+
+La configuración de **CORS (Cross-Origin Resource Sharing)** permite que el API Gateway reciba solicitudes desde diferentes dominios. Se permite el acceso desde cualquier origen (`allowOrigins: ["*"]`), y se habilitan los métodos HTTP `GET`, `POST`, y `PUT`. Además, se autorizan los encabezados `Authorization` y `Content-Type`.
+
+## 🛠 Integraciones Lambda
+
+Las integraciones Lambda se configuran para manejar las solicitudes de las rutas definidas en la API. Se crean integraciones específicas para cada tipo de template:
+
+- **ProjectTemplate Integration**: Gestiona las solicitudes para los templates de proyectos.
+- **ModuleTemplate Integration**: Gestiona las solicitudes para los templates de módulos.
+- **SubModuleTemplate Integration**: Gestiona las solicitudes para los templates de submódulos.
+
+Cada integración se asocia con rutas específicas a través del API Gateway.
+
+## 🛤 Rutas Definidas
+
+### 📌 **Rutas de `ProjectTemplate`**
+
+| Método   | Ruta                                 | Descripción                                                        |
+| -------- | ------------------------------------ | ------------------------------------------------------------------ |
+| GET      | `/project-template/last/{one}/{two}` | Obtiene el último template de proyecto con parámetros específicos. |
+| POST     | `/project-template`                  | Crea un nuevo template de proyecto.                                |
+| GET      | `/project-template/{one}`            | Obtiene información de un template de proyecto específico.         |
+| GET      | `/project-template-all`              | Obtiene todos los templates de proyectos.                          |
+| GET, PUT | `/project-template/{one}/{two}`      | Obtiene o actualiza un template de proyecto específico.            |
+
+### 📌 **Rutas de `ModuleTemplate`**
+
+| Método   | Ruta                           | Descripción                                              |
+| -------- | ------------------------------ | -------------------------------------------------------- |
+| POST     | `/module-template`             | Crea un nuevo template de módulo.                        |
+| GET      | `/module-template/{one}`       | Obtiene información de un template de módulo específico. |
+| GET, PUT | `/module-template/{one}/{two}` | Obtiene o actualiza un template de módulo específico.    |
+| GET      | `/module-template-all`         | Obtiene todos los templates de módulos.                  |
+
+### 📌 **Rutas de `SubModuleTemplate`**
+
+| Método   | Ruta                               | Descripción                                                             |
+| -------- | ---------------------------------- | ----------------------------------------------------------------------- |
+| POST     | `/sub-module-template`             | Crea un nuevo template de submódulo.                                    |
+| GET      | `/sub-module-template/{one}`       | Obtiene información de un template de submódulo específico.             |
+| GET, PUT | `/sub-module-template/{one}/{two}` | Obtiene o actualiza un template de submódulo específico.                |
+| GET      | `/sub-module-template/all/{one}`   | Obtiene todos los templates de submódulos para un parámetro específico. |
+| GET      | `/sub-module-template-all`         | Obtiene todos los templates de submódulos.                              |
+
+## 🔒 Autorización JWT
+
+Cada ruta está protegida por un **autorizador JWT**, lo que garantiza que solo los usuarios autenticados puedan interactuar con la API de manera segura.
+
+---
+
+🔹 **Continúa con la siguiente sección:** [Project Template Cache](./project-template-cache.mdx)

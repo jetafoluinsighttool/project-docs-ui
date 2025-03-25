@@ -1,5 +1,131 @@
 ---
-title: title
-description: description
-keywords: []
+title: "Configuración de Cognito y API"
+description: "Este archivo detalla la configuración de Amazon Cognito, la integración de proveedores de identidad externos, la creación de clientes de API y otros elementos de infraestructura, incluyendo rutas y funciones Lambda, para un sistema de autenticación y gestión de usuarios."
+keywords: "Cognito, API, Lambda, DynamoDB, autenticación, proveedores de identidad, Google, configuración, infraestructura"
 ---
+
+## Introducción
+
+Este archivo tiene como objetivo proporcionar una guía detallada de la configuración del sistema de autenticación y gestión de usuarios utilizando **Amazon Cognito** y servicios relacionados. En el proceso, se abordan aspectos clave como la creación y configuración de **User Pools**, la integración con **proveedores de identidad externos** (como Google), el establecimiento de **grupos de usuarios**, la gestión de **tokens JWT** para seguridad en las rutas de la API y la creación de funciones **Lambda** para gestionar los datos de los usuarios. Además, se configura una tabla **DynamoDB** para el almacenamiento eficiente de la información de los usuarios.
+
+La implementación descrita a continuación está diseñada para brindar flexibilidad, escalabilidad y seguridad al sistema, permitiendo una integración fluida de los usuarios y su información en las aplicaciones que lo utilicen.
+
+---
+
+### 🧑‍💻 **Configuración de Cognito User Pool**
+
+El **User Pool** de **Amazon Cognito** gestiona la información de los usuarios registrados en la aplicación.
+
+| Parámetro             | Descripción                                                                                                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **userPoolName**      | Nombre del User Pool. El nombre incluye el entorno (stage), como `ProjectAuthApiUserPool-${stage}`.                                                                       |
+| **selfSignUpEnabled** | Habilita el auto-registro de usuarios.                                                                                                                                    |
+| **signInAliases**     | Permite el inicio de sesión con el **email** o **nombre de usuario**.                                                                                                     |
+| **autoVerify**        | Configura la verificación automática del **email** al registrarse.                                                                                                        |
+| **userVerification**  | Personaliza el correo de verificación que se envía al usuario con un código.                                                                                              |
+| **passwordPolicy**    | Configura la política de contraseñas, que requiere un mínimo de 8 caracteres y al menos una letra mayúscula.                                                              |
+| **customAttributes**  | Define atributos personalizados como `groups`, `phone`, `role`, `organization`, `country`, `city`, y `terms` que pueden usarse para gestionar la información del usuario. |
+
+---
+
+### 🔑 **Proveedor de Identidad Externa (Google)**
+
+El **Proveedor de Identidad de Google** permite a los usuarios iniciar sesión con sus cuentas de Google.
+
+| Parámetro            | Descripción                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **clientId**         | El ID de cliente de Google, que depende del entorno (producción o staging).                                              |
+| **clientSecret**     | El secreto del cliente de Google, que también depende del entorno.                                                       |
+| **scopes**           | Define los permisos que se solicitan a Google, como `email`, `profile`, `openid`, y `phone`.                             |
+| **attributeMapping** | Mapea los atributos de Google a los atributos del User Pool de Cognito, como `preferredUsername`, `email`, y `fullname`. |
+
+---
+
+### 🧑‍💻 **Clientes de la API (AppClient)**
+
+El **AppClient** es utilizado para interactuar con el **User Pool** desde una aplicación externa.
+
+| Parámetro                      | Descripción                                                                                                                                              |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **userPoolClientName**         | Nombre del cliente de la aplicación, como `BasicAppClient-${stage}`.                                                                                     |
+| **authFlows**                  | Habilita flujos de autenticación, como el flujo de contraseña de usuario y el flujo SRP (Secure Remote Password).                                        |
+| **oAuth**                      | Configura el flujo de autorización de **OAuth**, habilitando los permisos necesarios y las URLs de redirección y cierre de sesión para la autenticación. |
+| **preventUserExistenceErrors** | Evita errores cuando un usuario ya existe en el pool de usuarios.                                                                                        |
+| **accessTokenValidity**        | Establece la validez del token de acceso, en este caso de 60 minutos.                                                                                    |
+| **refreshTokenValidity**       | Establece la validez del token de actualización, en este caso de 30 días.                                                                                |
+| **supportedIdentityProviders** | Especifica los proveedores de identidad soportados, como **Cognito** y **Google**.                                                                       |
+
+---
+
+### 👥 **Grupos de Usuarios**
+
+Se crean grupos de usuarios para categorizar a los usuarios según sus roles.
+
+| Grupo                  | Descripción                                                              |
+| ---------------------- | ------------------------------------------------------------------------ |
+| **ProjectEvaluator**   | Grupo para usuarios que revisan las respuestas de los proyectos.         |
+| **ProjectContributor** | Grupo para usuarios que responden preguntas del proyecto.                |
+| **ProjectArchitect**   | Grupo para usuarios responsables de estructurar y construir el proyecto. |
+
+---
+
+### 🌐 **Dominio Cognito**
+
+Se configura un dominio para la autenticación de Cognito con un prefijo personalizado según el entorno.
+
+| Parámetro        | Descripción                                                      |
+| ---------------- | ---------------------------------------------------------------- |
+| **domainPrefix** | Prefijo del dominio Cognito, que cambia dependiendo del entorno. |
+
+---
+
+### 🗃️ **Tabla DynamoDB para Usuarios**
+
+Se configura una tabla **DynamoDB** para almacenar la información de los usuarios.
+
+| Parámetro                | Descripción                                                                                       |
+| ------------------------ | ------------------------------------------------------------------------------------------------- |
+| **partitionKey**         | Clave primaria para la tabla, en este caso `pk`.                                                  |
+| **sortKey**              | Clave de ordenación para la tabla, en este caso `sk`.                                             |
+| **globalSecondaryIndex** | Se añaden índices secundarios globales para mejorar las consultas.                                |
+| **billingMode**          | Modo de facturación, configurado como **PAY_PER_REQUEST**.                                        |
+| **removalPolicy**        | Política de eliminación, configurada para destruir la tabla en staging y retenerla en producción. |
+
+---
+
+### 🛠️ **Lambda Function para Usuarios**
+
+Se configura una **Lambda Function** para gestionar las operaciones relacionadas con los usuarios.
+
+| Parámetro       | Descripción                                                                      |
+| --------------- | -------------------------------------------------------------------------------- |
+| **runtime**     | Establece el entorno de ejecución, en este caso **Node.js 18.x**.                |
+| **entry**       | Especifica el archivo de entrada de la función Lambda, `lambda/User.handler.ts`. |
+| **environment** | Variables de entorno, en este caso la tabla de DynamoDB `TABLE_NAME`.            |
+
+---
+
+### 🔑 **Autorización JWT para API**
+
+Se configura un **Autorizador JWT** para proteger las rutas de la API.
+
+| Parámetro          | Descripción                                                                             |
+| ------------------ | --------------------------------------------------------------------------------------- |
+| **identitySource** | Define el encabezado **Authorization** como fuente de identidad.                        |
+| **jwtAudience**    | Define la audiencia del JWT, que debe coincidir con el ID del cliente de la aplicación. |
+
+---
+
+### 🌐 **Configuración de Rutas HTTP API**
+
+Se crean rutas en la API para gestionar las operaciones de usuarios.
+
+| Ruta            | Método   | Descripción                                |
+| --------------- | -------- | ------------------------------------------ |
+| **/user**       | **POST** | Ruta para crear un nuevo usuario.          |
+| **/user/`{one}`** | **PUT**  | Ruta para actualizar un usuario existente. |
+| **/users**      | **GET**  | Ruta para obtener una lista de usuarios.   |
+
+---
+
+Con esta configuración, tu sistema de autenticación y gestión de usuarios estará listo para interactuar con aplicaciones de forma segura y eficiente. Esta arquitectura escalable es adecuada tanto para entornos de producción como de desarrollo.

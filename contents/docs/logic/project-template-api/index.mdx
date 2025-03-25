@@ -1,5 +1,40 @@
----
-title: title
-description: description
-keywords: []
----
+# 📌 Project Template API
+
+La **Project Template API** es un servicio diseñado para gestionar en contenido de las preguntas por módulos, sub módulos y las preguntas con su puntaje y peso, asegurando eficiencia, escalabilidad y seguridad mediante el uso de tecnologías **serverless** en AWS.
+
+El servicio está construido con **AWS CDK** y se basa en **AWS Lambda, API Gateway y DynamoDB**, permitiendo una infraestructura sin servidores y optimizada para la carga dinámica.
+
+## 📂 Estructura de Documentación
+
+Esta documentación se divide en seis secciones clave para una mejor comprensión del sistema:
+
+1️⃣ [**Arquitectura**](./project-template-architecture.mdx)
+
+- Estructura general del servicio.
+- Separación de entornos.
+
+2️⃣ [**Seguridad y Autenticación**](./project-template-security.mdx)
+
+- Uso de **Amazon Cognito** para la gestión de identidades.
+- Control de acceso a la API.
+
+3️⃣ [**Almacenamiento de Datos**](./project-template-storage.mdx)
+
+- Uso de **Amazon DynamoDB** como base de datos NoSQL.
+- Estructura de los datos almacenados.
+
+4️⃣ [**Funciones Lambda**](./project-template-lambdas.mdx)
+
+- Descripción de las principales **Lambdas** del servicio.
+- Casos de uso y lógica implementada.
+
+5️⃣ [**API Gateway**](./project-template-api-gateway.mdx)
+
+- Configuración y rutas principales de la API.
+- Métodos disponibles y estructura de peticiones/respuestas.
+
+## ✅ Conclusión
+
+La **Project Template API** permite administrar preguntas por módulos de manera eficiente, asegurando separación entre entornos y facilitando la trazabilidad de cambios mediante **AWS CDK**.
+
+🔹 **Continúa con la siguiente sección:** [Arquitectura](./project-template-architecture.mdx)

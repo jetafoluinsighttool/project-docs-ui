@@ -1,0 +1,164 @@
+---
+title: "Configuración de Almacenamiento de Preguntas en Templates de Proyecto"
+description: "Aprende cómo estructurar las preguntas dentro de los templates de proyecto para generar formularios dinámicos, incluyendo el uso de diferentes tipos de campos y ejemplos prácticos."
+keywords:
+  [
+    "template de proyecto",
+    "configuración de preguntas",
+    "formularios dinámicos",
+    "estructura JSON",
+  ]
+---
+
+# Configuración de Almacenamiento de Preguntas en Templates de Proyecto
+
+En este tutorial, aprenderás cómo estructurar correctamente las preguntas dentro del campo `questions` en la configuración del template de un proyecto. Estas preguntas son cruciales para generar formularios dinámicos que los usuarios completarán.
+
+## ¿Cómo se estructura una pregunta?
+
+Cada pregunta en el JSON debe seguir una estructura específica que defina tanto la apariencia del campo como el tipo de interacción que se tendrá con el usuario. Aquí te explicamos cada propiedad que deberás incluir para crear una pregunta.
+
+### Estructura de una Pregunta
+
+```json
+{
+  "type": "textarea",
+  "name": "address_objectives",
+  "label": "Abordar objetivos",
+  "placeholder": "¿Cómo se están coordinando actualmente las comunidades y organizaciones para abordar los objetivos sociales, económicos y ambientales de la transición?",
+  "description": "Abordar objetivos",
+  "score": "5",
+  "weight": 0,
+  "id": "address_objectives",
+  "position": 0
+}
+```
+
+### Propiedades de la Pregunta
+
+#### 1. **type**
+
+- **Descripción**: El tipo de campo que se mostrará en el formulario. Los tipos más comunes son `textarea`, `select`, `radio`, y `multiselect`.
+- **Ejemplo**: `"type": "textarea"`
+
+#### 2. **name**
+
+- **Descripción**: Es el nombre único de la pregunta. Este nombre se utilizará para referirse a la pregunta dentro del sistema o en el código.
+- **Ejemplo**: `"name": "address_objectives"`
+
+#### 3. **label**
+
+- **Descripción**: Es la etiqueta que el usuario verá junto a la pregunta. Puede ser un título o la descripción corta de lo que se está preguntando.
+- **Ejemplo**: `"label": "Abordar objetivos"`
+
+#### 4. **placeholder**
+
+- **Descripción**: Es el texto de sugerencia que se muestra en el campo de respuesta antes de que el usuario empiece a escribir.
+- **Ejemplo**: `"placeholder": "¿Cómo se están coordinando actualmente las comunidades y organizaciones para abordar los objetivos sociales, económicos y ambientales de la transición?"`
+
+#### 5. **description**
+
+- **Descripción**: Proporciona detalles adicionales sobre la pregunta. Esto puede ser útil para explicar más a fondo lo que se espera como respuesta.
+- **Ejemplo**: `"description": "Abordar objetivos"`
+
+#### 6. **score**
+
+- **Descripción**: El puntaje asociado con la respuesta de esta pregunta. Esto puede ser útil si se están evaluando o ponderando las respuestas.
+- **Ejemplo**: `"score": "5"`
+
+#### 7. **weight**
+
+- **Descripción**: El peso que tiene esta pregunta en el cálculo general. Un peso de 0 puede indicar que no se tomará en cuenta para las métricas, mientras que un peso mayor indica mayor relevancia.
+- **Ejemplo**: `"weight": 0`
+
+#### 8. **id**
+
+- **Descripción**: Es un identificador único de la pregunta dentro de la base de datos o el sistema. Este debe ser único para cada pregunta y se utiliza para buscar y gestionar la pregunta.
+- **Ejemplo**: `"id": "address_objectives"`
+
+#### 9. **position**
+
+- **Descripción**: Define el orden de la pregunta dentro del formulario. Este valor es útil cuando las preguntas deben aparecer en un orden específico.
+- **Ejemplo**: `"position": 0`
+
+---
+
+## Ejemplo Completo
+
+Para ayudarte a visualizar mejor cómo estructurar varias preguntas, aquí tienes un ejemplo completo con varias preguntas que pueden formar parte de un submódulo de un template de proyecto.
+
+### Ejemplo de JSON con varias preguntas:
+
+```json
+[
+  {
+    "type": "textarea",
+    "name": "address_objectives",
+    "label": "Abordar objetivos",
+    "placeholder": "¿Cómo se están coordinando actualmente las comunidades y organizaciones para abordar los objetivos sociales, económicos y ambientales de la transición?",
+    "description": "Abordar objetivos",
+    "score": "5",
+    "weight": 0,
+    "id": "address_objectives",
+    "position": 0
+  },
+  {
+    "type": "textarea",
+    "name": "mechanism_stakeholders_integrate_approach",
+    "label": "asociaciones",
+    "placeholder": "¿Qué estrategias pueden integrarse para consolidar un enfoque más coherente entre los diferentes actores clave?",
+    "description": "asociaciones",
+    "score": "5",
+    "weight": 0,
+    "id": "mechanism_stakeholders_integrate_approach",
+    "position": 1
+  },
+  {
+    "type": "textarea",
+    "name": "mechanism_address_problems",
+    "label": "asociaciones",
+    "placeholder": "¿Cómo se identifican y gestionan los problemas sistémicos que puedan limitar la colaboración o el progreso hacia resultados justos?",
+    "description": "asociaciones",
+    "score": "5",
+    "weight": 0,
+    "id": "mechanism_address_problems",
+    "position": 2
+  }
+]
+```
+
+En este ejemplo, hemos agregado tres preguntas dentro de un array. Cada pregunta tiene los mismos campos, pero se diferencian en el **name**, **id**, **label**, **placeholder**, y **position**. Recuerda que el campo **position** ayuda a organizar las preguntas en el orden adecuado cuando se presenten en el formulario.
+
+---
+
+## Tipos de Campos de Respuesta
+
+Las preguntas pueden tener diferentes tipos de campos dependiendo del tipo de respuesta que esperas de los usuarios. Aquí te mostramos algunos ejemplos comunes:
+
+### 1. **textarea**
+
+- **Descripción**: Permite una respuesta larga, ideal para preguntas abiertas.
+- **Ejemplo de uso**: `"type": "textarea"`
+
+### 2. **radio**
+
+- **Descripción**: Permite al usuario seleccionar una única opción de un conjunto de respuestas.
+- **Ejemplo de uso**: `"type": "radio"`
+
+### 3. **select**
+
+- **Descripción**: Similar a **radio**, pero con un menú desplegable de opciones.
+- **Ejemplo de uso**: `"type": "select"`
+
+### 4. **multiselect**
+
+- **Descripción**: Permite al usuario seleccionar múltiples opciones de una lista.
+- **Ejemplo de uso**: `"type": "multiselect"`
+
+---
+
+## Conclusión
+
+Estructurar correctamente el campo `questions` es esencial para asegurar que las preguntas dentro del formulario dinámico se comporten como se espera. Sigue la estructura mencionada en este tutorial y personaliza cada pregunta según el tipo de respuesta que se requiera, el puntaje o la ponderación y el orden de presentación.
+
+¡Ahora estás listo para crear y configurar tus preguntas de forma correcta y eficiente!

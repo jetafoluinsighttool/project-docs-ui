@@ -1,0 +1,43 @@
+---
+title: Configuración de Caché y Distribución de Contenido
+description: Optimización de la entrega de contenido utilizando CloudFront.
+keywords:
+  ["CloudFront", "Caché", "API Gateway", "Distribución de Contenido", "AWS"]
+---
+
+# 🌐 Configuración de Caché y Distribución de Contenido
+
+En el proyecto **Project Template**, se optimiza la entrega de contenido mediante el uso de **Amazon CloudFront**, una **CDN (Red de Distribución de Contenido)**, que acelera la entrega de los recursos a los usuarios finales.
+
+## 🚀 Propósito de la Caché
+
+La caché se utiliza para mejorar el rendimiento y reducir la carga en los servidores de backend. **CloudFront** almacena contenido en ubicaciones geográficas cercanas a los usuarios, lo que disminuye el tiempo de respuesta.
+
+### 🔄 Configuración de la Caché
+
+1. **Política de Caché**:
+
+   - **Default TTL**: 2 días, el tiempo que los objetos se mantienen en la caché antes de que se necesite una nueva solicitud.
+   - **Min TTL**: 1 día, el tiempo mínimo que un objeto puede permanecer en la caché.
+   - **Max TTL**: 3 días, el tiempo máximo que un objeto puede permanecer en la caché.
+   - **Comportamiento de Cabeceras y Consultas**: Se permite que los encabezados de autorización y las cadenas de consulta se utilicen en el proceso de caché, lo que asegura que las respuestas estén adaptadas a los usuarios y sus solicitudes.
+
+2. **Política de Origen**:
+   - Se define una política de solicitud de origen que maneja las solicitudes CORS y las configuraciones relacionadas con los orígenes, para facilitar la distribución correcta de los recursos.
+
+## 🌍 Distribución de Contenido con CloudFront
+
+**Amazon CloudFront** se configura para servir como la capa de entrega de contenido desde el **API Gateway**. CloudFront distribuye las solicitudes a través de sus múltiples ubicaciones geográficas, lo que permite que los recursos lleguen más rápido al usuario.
+
+### 🔧 Configuración de la Distribución
+
+- **Origen**: El **API Gateway** se utiliza como origen de la distribución, lo que permite que CloudFront entregue contenido desde el punto de acceso de la API de manera eficiente.
+- **Política de Caché**: Se aplica la política de caché previamente definida para optimizar las solicitudes.
+- **Métodos Permitidos**: CloudFront está configurado para permitir todos los métodos HTTP, lo que asegura que las solicitudes GET, POST, PUT y otros se gestionen correctamente.
+- **Política de Protocolo del Visualizador**: Se redirigen todas las solicitudes a **HTTPS**, lo que mejora la seguridad y garantiza que el tráfico sea cifrado.
+
+## 🛠 Beneficios de CloudFront y la Caché
+
+✅ **Rendimiento Mejorado**: Al distribuir el contenido a través de múltiples ubicaciones, se reduce la latencia.
+✅ **Escalabilidad**: CloudFront escala automáticamente para manejar el tráfico creciente sin necesidad de intervención manual.
+✅ **Seguridad Mejorada**: Las configuraciones de protocolo HTTPS y las políticas de autenticación aseguran que los datos se mantengan seguros.

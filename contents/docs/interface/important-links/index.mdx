@@ -1,5 +1,43 @@
 ---
-title: title
-description: description
-keywords: []
+title: "Estructura General del Proyecto"
+description: "Explora la organización y los componentes clave del ecosistema del proyecto, que incluye repositorios tanto de frontend como de backend, junto con las tecnologías utilizadas y el Just Transition Indicator (JTI) para la evaluación de proyectos."
+keywords: "estructura del proyecto, repositorios, frontend, backend, APIs, tecnologías, AWS, DynamoDB, Next.js, JTI, transición justa"
 ---
+
+# 🏗️ Estructura General del Proyecto
+
+Este ecosistema está compuesto por **siete repositorios principales**, organizados en dos grandes categorías:
+
+## 🌐 Interfaz (Frontend & Documentación)
+
+🔹 **project-entry-gate-ui** → Landing page informativa del proyecto, desarrollada en **Next.js** y desplegada en **Vercel**.
+🔹 **project-docs-ui** → Repositorio dedicado a la documentación del sistema, accesible desde una plataforma centralizada.
+🔹 **project-interface-ui** → Aplicación principal, desarrollada en **Next.js**, que gestiona la experiencia de usuario y asigna permisos según el perfil.
+
+## 🖥️ Lógica (Backend & APIs)
+
+🔹 **project-instance-api** → API encargada de manejar el **ProjectContributorGroup**, permitiendo a los usuarios responder preguntas y registrar información.
+🔹 **project-template-api** → API especializada en proporcionar preguntas estructuradas en **inglés y español**, almacenadas en **DynamoDB**.
+🔹 **project-reviewer-api** → API que genera métricas y evaluaciones basadas en las respuestas de los usuarios.
+🔹 **project-auth-api** → API de autenticación y seguridad, asegurando que solo los usuarios autorizados puedan acceder a los servicios.
+
+## ⚙️ Tecnologías clave
+
+Este proyecto se construye sobre un **stack tecnológico moderno y escalable**, combinando lo mejor de la nube y frameworks de alto rendimiento:
+
+- **AWS CDK** → Infraestructura como código para la gestión automatizada de los recursos en la nube.
+- **Node.js** → Plataforma de desarrollo para la ejecución de las APIs con **TypeScript**.
+- **DynamoDB** → Base de datos NoSQL altamente escalable, optimizada para queries rápidas sin necesidad de escaneos completos.
+- **API Gateway** → Punto central de entrada para las APIs, asegurando seguridad y control de tráfico.
+- **CloudFormation** → Automatización y orquestación de los despliegues en AWS.
+- **CloudFront** → Red de distribución de contenido (CDN) para optimizar la entrega de los recursos estáticos y dinámicos.
+- **Next.js** → Framework de **React** utilizado en la interfaz de usuario para ofrecer rendimiento optimizado.
+- **Vercel** → Plataforma de despliegue de frontend con integración continua y tiempos de carga optimizados.
+- **Cognito** → Servicio de autenticación de AWS que maneja sesiones de usuario y permisos.
+- **Lambda** → Ejecución de funciones serverless para procesos en segundo plano.
+
+## 📊 Just Transition Indicator (JTI)
+
+El **JTI** es el núcleo del sistema de evaluación de proyectos, permitiendo una medición objetiva de la transición justa. Su implementación está profundamente integrada en la plataforma, asegurando análisis en tiempo real y adaptabilidad a diversos contextos.
+
+📌 **Cada uno de estos componentes tiene una sección dedicada dentro de la documentación para mayor profundidad en su funcionamiento y configuración.**

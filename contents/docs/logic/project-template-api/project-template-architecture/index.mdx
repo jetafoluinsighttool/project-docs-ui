@@ -1,0 +1,35 @@
+---
+title: Project Template API - Arquitectura
+description: Descripción de la arquitectura de la Project Template API, incluyendo entornos de despliegue y beneficios.
+keywords: ["AWS", "Cognito", "API", "Arquitectura", "Entornos"]
+---
+
+# 🏗 Project Template API - Arquitectura
+
+La **Project Template API** se despliega en dos entornos separados para garantizar estabilidad, control y escalabilidad. Esta separación permite realizar pruebas sin afectar la operación en vivo.
+
+## 🌍 Entornos Disponibles
+
+### 🔹 **Staging**
+
+- Utilizado para pruebas y validaciones antes de su implementación en producción.
+- Permite evaluar nuevas funcionalidades y detectar posibles errores sin riesgos operativos.
+
+### 🔹 **Production**
+
+- Entorno estable donde se ejecuta la API en vivo.
+- Optimizado para rendimiento y disponibilidad.
+
+Cada entorno cuenta con su propia infraestructura independiente, lo que incluye:
+
+✅ **User Pool en Cognito:** Gestiona autenticación y control de acceso.
+✅ **API de Plantilla Asociada:** Permite interactuar con la base de datos de preguntas y respuestas.
+✅ **Configuraciones Específicas:** Variables de entorno y recursos independientes para evitar conflictos.
+
+## 📌 Beneficios de esta Arquitectura
+
+🔸 Asegura que las pruebas no afecten a los usuarios finales.
+🔸 Facilita la trazabilidad y el monitoreo de cambios.
+🔸 Permite asignar recursos adecuados según la carga y necesidades de cada entorno.
+
+🔹 **Continúa con la siguiente sección:** [Seguridad y Autenticación](./project-template-security.mdx)

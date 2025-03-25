@@ -1,5 +1,79 @@
 ---
-title: Documentation
-description: description
+title: JET en AFOLU
+description: Herramienta de Perspectivas sobre una JET en AFOLU
 keywords: []
 ---
+
+# 📌 Proyecto: Herramienta de Perspectivas sobre una JET en AFOLU
+
+## 🌍 ¿Qué es esta herramienta?
+
+La **Herramienta de Perspectivas sobre una JET en AFOLU** identifica oportunidades y desafíos para lograr una **transición justa y equitativa** en la mitigación y adaptación al cambio climático dentro del sector **AFOLU (Agriculture, Forestry, and Other Land Use)**. Su enfoque está dirigido a la región de **América Latina y el Caribe**, permitiendo a los usuarios evaluar sus proyectos mediante una serie de preguntas diseñadas para analizar su impacto y alineación con principios de transición justa.
+
+El sistema guía al usuario en un proceso paso a paso para asegurar una evaluación integral y flexible, adaptándose a la diversidad de actores y contextos en la región. Desde una perspectiva técnica, la plataforma incorpora el **Just Transition Indicator (JTI)**, una métrica que permite cuantificar cómo se posiciona un proyecto en términos de **transición justa**.
+
+El **JTI** surge como respuesta a la necesidad de los clientes de contar con una **forma objetiva y estandarizada de puntuar sus proyectos**, facilitando así la toma de decisiones informadas. Este indicador tiene una sección específica dentro de la plataforma, donde se explica su origen, desarrollo y metodología de aplicación.
+
+---
+
+## 🚀 Tecnología y arquitectura
+
+El proyecto está construido sobre una arquitectura **escalable, eficiente y moderna**, basada en tecnologías líderes del mercado.
+
+### 🏗️ Infraestructura en AWS con CDK
+
+- Todo el backend está desplegado en **AWS CDK (Cloud Development Kit)**, una herramienta de infraestructura como código que permite una administración **segura, modular y reutilizable** de los recursos en la nube.
+- Utilizamos **Amazon DynamoDB**, una base de datos NoSQL altamente escalable y de baja latencia, con un modelo de acceso basado exclusivamente en **queries optimizadas en índices** en lugar de escaneos completos.
+- Este enfoque garantiza **mayor rendimiento, menor costo y mayor seguridad**, ya que las consultas están diseñadas para recuperar datos de manera **rápida y precisa sin sobrecargar la base de datos**.
+
+📌 **Beneficios de AWS CDK y DynamoDB:**
+✅ **Automatización y despliegues rápidos:** Toda la infraestructura se administra como código, permitiendo despliegues controlados y repetibles.
+✅ **Alta disponibilidad y escalabilidad:** AWS gestiona la infraestructura de forma dinámica para adaptarse a la carga de trabajo sin intervención manual.
+✅ **Bajo costo y eficiencia:** El modelo de acceso basado en queries evita costosos escaneos de datos, optimizando el uso de los recursos.
+
+---
+
+### 🎨 Aplicaciones Web con Next.js
+
+- Toda la interfaz de usuario está construida con **Next.js**, un framework de React optimizado para aplicaciones web rápidas y eficientes.
+- Next.js es utilizado por **grandes empresas como Netflix, TikTok, GitHub, Twitch y Airbnb**, gracias a sus capacidades de **SSR (Server-Side Rendering) e ISR (Incremental Static Regeneration)**, que mejoran la velocidad y SEO de la aplicación.
+
+📌 **Beneficios de Next.js:**
+✅ **Carga ultrarrápida:** Gracias a su renderizado optimizado, la experiencia de usuario es fluida y sin demoras.
+✅ **Seguridad y rendimiento mejorado:** Next.js maneja las páginas de forma eficiente, reduciendo la carga en los servidores.
+✅ **Compatibilidad con APIs modernas:** La comunicación con el backend se realiza a través de API Routes, optimizando el consumo de datos.
+
+---
+
+### ☁️ Despliegue en Vercel
+
+- **Vercel** es la plataforma elegida para alojar la aplicación web, proporcionando **despliegues instantáneos, CI/CD integrado y optimización automática de rendimiento**.
+- Empresas como **Meta, Uber y Washington Post** usan Vercel para asegurar aplicaciones web de alto tráfico con rendimiento óptimo.
+
+📌 **Beneficios de Vercel:**
+✅ **Despliegue continuo:** Cada cambio en el código se refleja automáticamente en un nuevo despliegue.
+✅ **Optimización automática:** Reduce los tiempos de carga con caching inteligente y redes de distribución global.
+✅ **Alta disponibilidad:** Maneja tráfico global sin problemas de latencia o caídas.
+
+---
+
+## 📈 ¿Por qué esta herramienta es innovadora?
+
+✅ **Metodología única:** Integra el **Just Transition Indicator (JTI)**, una métrica innovadora para evaluar la transición justa en proyectos AFOLU.
+✅ **Diseño basado en mejores prácticas:** Utiliza patrones de arquitectura modernos en AWS, Next.js y bases de datos NoSQL optimizadas.
+✅ **Escalabilidad garantizada:** Pensado para crecer sin comprometer rendimiento ni costos operativos.
+✅ **Experiencia de usuario optimizada:** Una interfaz clara, intuitiva y adaptada a distintos perfiles de usuario.
+
+📌 **En resumen, esta plataforma no solo facilita la evaluación de proyectos en transición justa, sino que lo hace con una infraestructura de alto rendimiento y tecnologías de última generación.**
+
+---
+
+## 🌟 Un stack tecnológico usado por líderes de la industria
+
+La combinación de **AWS CDK, Next.js y Vercel** no solo garantiza un alto rendimiento y escalabilidad, sino que también es el stack tecnológico elegido por algunas de las **empresas más grandes y exigentes del mundo**.
+
+🔹 **AWS CDK**: Utilizado por compañías como Amazon, Capital One y Coinbase para infraestructura escalable y automatizada.
+🔹 **Next.js**: Adoptado por Netflix, Twitch, GitHub y TikTok debido a su capacidad de optimización y renderizado dinámico.
+🔹 **Vercel**: Plataforma líder en hosting de aplicaciones frontend, utilizada por Meta, Uber y Shopify.
+
+Este stack permite que la **Herramienta de Perspectivas sobre una JET en AFOLU** sea una solución **rápida, segura y preparada para el futuro**, asegurando que tanto la infraestructura como la experiencia del usuario estén optimizadas al máximo.

@@ -1,0 +1,86 @@
+---
+title: Configuración de Almacenamiento de Templates
+description: Guía para guardar y organizar los datos en la tabla de templates, utilizada para generar formularios dinámicos.
+keywords: ["DynamoDB", "ProjectTemplate", "ModuleTemplate", "SubModuleTemplate", "Almacenamiento", "Formulario Dinámico"]
+---
+
+# 📂 Configuración de Almacenamiento en la Tabla de Templates
+
+El almacenamiento de templates se organiza en tres documentos distintos, cada uno representando una parte esencial de la estructura del proyecto. Estos documentos son clave para construir un formulario dinámico que se ajuste a las necesidades del usuario. A continuación, se detallan los campos y la estructura para cada uno de los documentos: **ProjectTemplate**, **ModuleTemplate** y **SubModuleTemplate**.
+
+## 🏗 **Estructura del Documento: ProjectTemplate**
+
+Este documento representa el template principal del proyecto y es esencial para la construcción del formulario dinámico. Los campos son los siguientes:
+
+1. **pk**: Identificador principal del proyecto. En este caso, se refiere al idioma (por ejemplo, español) y al tipo de entidad “ProjectTemplate”.
+2. **sk**: Identificador único para este template específico de proyecto.
+3. **createdAt**: Fecha y hora de creación del proyecto.
+4. **description**: Breve descripción del proyecto.
+5. **entityType**: Tipo de entidad, que en este caso es “ProjectTemplate”.
+6. **firstGlobalSecondaryIndexPk**: Índice secundario global que incluye el idioma y el estado del proyecto, útil para realizar búsquedas rápidas.
+7. **firstGlobalSecondaryIndexSk**: Índice secundario que ordena los proyectos por la fecha de creación.
+8. **name**: Nombre del proyecto.
+9. **state**: Estado actual del proyecto, por ejemplo, “progress” (en progreso).
+10. **updatedAt**: Fecha y hora en que se actualizó por última vez el proyecto.
+
+Este documento es la base para la creación de formularios de proyectos, y su estructura permite acceder rápidamente a la información relevante sobre el estado y la descripción de los proyectos.
+
+## 🏗 **Estructura del Documento: ModuleTemplate**
+
+El documento **ModuleTemplate** define los módulos dentro de un proyecto y su configuración. Los campos para este documento son:
+
+1. **pk**: Identificador único del template del proyecto.
+2. **sk**: Identificador único para este módulo dentro del proyecto.
+3. **createdAt**: Fecha y hora de creación del módulo.
+4. **description**: Descripción detallada del módulo, que puede incluir la definición de objetivos o la planificación estratégica.
+5. **entityType**: Tipo de entidad, en este caso, “ModuleTemplate”.
+6. **name**: Nombre del módulo.
+7. **position**: La posición del módulo dentro de la secuencia de módulos.
+8. **updatedAt**: Fecha y hora en que se actualizó por última vez el módulo.
+
+Cada módulo dentro del proyecto tiene su propio template, lo que permite una estructuración ordenada del proyecto. Los módulos se almacenan de acuerdo con su posición en el proyecto, facilitando la creación del formulario paso a paso.
+
+## 🏗 **Estructura del Documento: SubModuleTemplate**
+
+El documento **SubModuleTemplate** describe los submódulos dentro de cada módulo y se enfoca en las preguntas que se incluirán en el formulario. Los campos de este documento son:
+
+1. **pk**: Identificador único del módulo en el que se encuentra este submódulo.
+2. **sk**: Identificador único para el submódulo.
+3. **amountQuestions**: Número de preguntas dentro del submódulo.
+4. **createdAt**: Fecha y hora de creación del submódulo.
+5. **description**: Descripción detallada del submódulo, que puede incluir evaluaciones de impacto o estrategias de mitigación en sectores específicos.
+6. **entityType**: Tipo de entidad, en este caso, “SubModuleTemplate”.
+7. **firstGlobalSecondaryIndexPk**: Índice secundario global que permite realizar búsquedas rápidas de este submódulo en relación con el template del proyecto.
+8. **firstGlobalSecondaryIndexSk**: Índice secundario que categoriza el submódulo según el número de preguntas.
+9. **name**: Nombre del submódulo.
+10. **position**: Posición del submódulo en la secuencia del módulo.
+11. **questions**: Lista de preguntas que conforman el submódulo. Cada pregunta tiene un tipo y posibles respuestas. Los tipos de preguntas incluyen opciones como “select”, “textarea”, etc.
+12. **updatedAt**: Fecha y hora en que se actualizó por última vez el submódulo.
+
+Este documento es crucial para el formulario dinámico, ya que contiene las preguntas y las posibles respuestas, estructurando cómo se mostrarán las opciones al usuario.
+
+## 📝 **Tipos de Campos en las Preguntas**
+
+Las preguntas dentro de los submódulos pueden tener diferentes tipos de campos, dependiendo del tipo de respuesta que se espera del usuario. Estos son algunos de los tipos de campos más comunes:
+
+- **multiselect**: Permite seleccionar múltiples opciones de una lista.
+- **checkbox**: Similar al multiselect, pero generalmente usado para respuestas de sí/no o verdadero/falso.
+- **select**: Un campo de selección donde el usuario elige una opción de una lista desplegable.
+- **radio**: Un conjunto de opciones mutuamente excluyentes, es decir, solo se puede elegir una opción.
+- **text**: Un campo de texto para respuestas cortas.
+- **textarea**: Un campo de texto para respuestas largas, como descripciones o explicaciones detalladas.
+
+Estos tipos de campos permiten una variedad de formatos de respuesta, asegurando que los formularios sean flexibles y adaptables a las necesidades del usuario.
+
+## ⚙ **Índices Secundarios**
+
+Los índices secundarios (Global Secondary Indexes, GSI) son fundamentales para optimizar las búsquedas dentro de las tablas. En este caso, se utilizan para:
+
+- **Realizar búsquedas rápidas** en base a atributos como el idioma, estado y fecha de creación de los templates.
+- **Ordenar los proyectos y submódulos** de acuerdo con su fecha de creación o el número de preguntas en el submódulo, permitiendo una navegación más eficiente.
+
+## 🔐 **Seguridad y Autorización**
+
+Todos los datos almacenados en la tabla de templates están protegidos mediante un sistema de autenticación y autorización. Esto asegura que solo los usuarios autorizados puedan acceder, modificar o crear nuevos templates y submódulos.
+
+---

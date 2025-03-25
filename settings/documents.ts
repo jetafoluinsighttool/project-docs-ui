@@ -62,17 +62,65 @@ export const Documents: Paths[] = [
       {
         title: "Project instance-api",
         href: "/project-instance-api",
+        items: [
+          {
+            title: "Project instance api gateway",
+            href: "/project-instance-api-gateway",
+          },
+          {
+            title: "Project instance security",
+            href: "/project-instance-security",
+          },
+          {
+            title: "Project instance storage",
+            href: "/project-instance-storage",
+          }
+        ]
       },
       {
         title: "Project template-api",
         href: "/project-template-api",
+        items: [
+          {
+            title: "Project template api-gateway",
+            href: "/project-template-api-gateway",
+          },
+          {
+            title: "Project template architecture",
+            href: "/project-template-architecture",
+          },
+          {
+            title: "Project template cache",
+            href: "/project-template-cache",
+          },
+          {
+            title: "Project template lambdas",
+            href: "/project-template-lambdas",
+          },
+          {
+            title: "Project template security",
+            href: "/project-template-security",
+          },
+          {
+            title: "Project template storage",
+            href: "/project-template-storage",
+          },
+          {
+            title: "Project template storage configuration",
+            href: "/project-template-storage-configuration",
+          },
+          {
+            title: "Project template storage configuration questions",
+            href: "/project-template-storage-configuration-questions",
+          },
+        ]
       },
       {
-        title: "Project reviewer-api",
+        title: "Project reviewer api",
         href: "/project-reviewer-api",
       },
       {
-        title: "Project auth-api",
+        title: "Project auth api",
         href: "/project-auth-api",
       },
       {
@@ -80,7 +128,7 @@ export const Documents: Paths[] = [
         href: "/backend-architecture",
       },
       {
-        title: "Important-links",
+        title: "Important links",
         href: "/important-links",
       },
     ],
