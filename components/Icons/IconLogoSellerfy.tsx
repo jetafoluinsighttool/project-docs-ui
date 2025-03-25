@@ -1,10 +1,8 @@
+/* eslint-disable */
 import { IconSvgProps } from "@/types"
 
 export const IconLogo= ({
   size = 24,
-  width,
-  height,
-  ...props
 }: IconSvgProps) => (
   <svg version="1.1" viewBox="0 0 2000 2000" width="25" height="25">
     <path
