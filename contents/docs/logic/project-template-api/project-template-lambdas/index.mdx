@@ -1,5 +1,42 @@
 ---
-title: vacio
-description: vacio
-keywords: []
+title: Configuración de Lambdas para Project Template
+description: Definición y configuración de funciones Lambda para la gestión de templates de proyectos, módulos y submódulos.
+keywords:
+  ["AWS Lambda", "Node.js", "DynamoDB", "Templates", "Backend Serverless"]
 ---
+
+# ⚡ Configuración de Lambdas para Project Template
+
+Las funciones **AWS Lambda** se encargan de procesar las solicitudes relacionadas con los **templates de proyectos, módulos y submódulos**. Estas funciones se ejecutan en un entorno **serverless**, lo que permite una escalabilidad automática y una optimización de costos eficiente.
+
+## 🏗 Funciones Lambda Implementadas
+
+Para garantizar una separación clara de responsabilidades, cada tipo de template cuenta con su propia función Lambda:
+
+- **ProjectTemplateLambda**: Gestiona las operaciones relacionadas con los templates de proyectos.
+- **ModuleTemplateLambda**: Maneja las solicitudes para los templates de módulos.
+- **SubModuleTemplateLambda**: Se encarga de procesar los datos de los templates de submódulos.
+
+Cada una de estas funciones está escrita en **Node.js** y utiliza la versión **Node.js 18.x** del entorno de ejecución.
+
+## 📂 Ubicación del Código
+
+Las funciones Lambda están organizadas en archivos individuales dentro del directorio `lambda/`, lo que facilita la gestión del código y la implementación de mejoras.
+
+- `lambda/ProjectTemplate.handler.ts`
+- `lambda/ModuleTemplate.handler.ts`
+- `lambda/SubModuleTemplate.handler.ts`
+
+Cada archivo define la lógica específica para manejar las solicitudes entrantes, procesar los datos y devolver respuestas adecuadas.
+
+## 🛢 Integración con DynamoDB
+
+Las funciones Lambda interactúan con **Amazon DynamoDB**, una base de datos NoSQL escalable que almacena los templates de proyectos, módulos y submódulos. Para permitir esta interacción, cada función tiene acceso de **lectura y escritura** a la tabla DynamoDB correspondiente.
+
+## 🔐 Seguridad y Permisos
+
+Para garantizar la seguridad de los datos y el acceso controlado:
+
+- Cada función Lambda tiene permisos explícitos para leer y escribir en la tabla de DynamoDB.
+- Se siguen las **mejores prácticas de AWS IAM**, asignando permisos mínimos necesarios para su operación.
+- La configuración del entorno de cada función incluye el **nombre de la tabla DynamoDB** como variable de entorno, permitiendo una mayor flexibilidad en la gestión de entornos de desarrollo y producción.

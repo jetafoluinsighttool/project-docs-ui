@@ -68,6 +68,14 @@ export const Documents: Paths[] = [
             href: "/project-instance-api-gateway",
           },
           {
+            title: "Project instance lambdas",
+            href: "/project-instance-lambdas",
+          },
+          {
+            title: "Project instance architecture",
+            href: "/project-instance-architecture",
+          },
+          {
             title: "Project instance security",
             href: "/project-instance-security",
           },
@@ -124,10 +132,6 @@ export const Documents: Paths[] = [
         href: "/project-auth-api",
       },
       {
-        title: "Backend architecture",
-        href: "/backend-architecture",
-      },
-      {
         title: "Important links",
         href: "/important-links",
       },
@@ -147,6 +151,10 @@ export const Documents: Paths[] = [
       {
         title: "Environments",
         href: "/environments",
+      },
+      {
+        title: "Domains",
+        href: "/domains",
       },
       {
         title: "Deployment guide",

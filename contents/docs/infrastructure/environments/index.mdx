@@ -1,5 +1,65 @@
 ---
-title: title
-description: description
-keywords: []
+title: Configuración de Entornos en AWS CDK
+description: Guía sobre la configuración de entornos para el despliegue en AWS CDK.
+keywords: ["AWS CDK", "Entornos de despliegue", "Staging", "Producción"]
 ---
+
+## 📌 Entornos de Despliegue
+
+El proyecto cuenta con **dos entornos principales**:
+
+- **Staging (Pruebas)**: Un entorno de prueba para validar cambios antes de pasarlos a producción.
+- **Production (Producción)**: Entorno final donde corren los servicios en vivo y donde interactúan los usuarios.
+
+Cada entorno tiene su propia configuración, asegurando que los datos de producción no se vean afectados por pruebas accidentales.
+
+## ⚠️ Cuidado con las Variables de Entorno
+
+Las configuraciones de los entornos se manejan a través de **variables de entorno** que definen elementos clave como:
+
+- **Identificadores de recursos** (por ejemplo, `userPoolId`, `userPoolClientId`).
+- **Endpoints de APIs** (por ejemplo, `projectTemplateApi`).
+- **Regiones y cuentas de AWS**.
+
+Es fundamental asegurarse de que al desplegar **no se mezclen variables de entorno** entre `staging` y `production`, ya que esto podría generar problemas como **sobrescribir datos de producción con datos de prueba**.
+
+### 🔹 Variables de Entorno por Proyecto
+
+#### 1️⃣ **ProjectInstanceApiStack**
+
+Este stack maneja la API de instancia de proyectos. Las variables de entorno necesarias son:
+
+- `userPoolIdProduction`, `userPoolIdStaging`
+- `userPoolClientIdProduction`, `userPoolClientIdStaging`
+- `projectTemplateApiProduction`, `projectTemplateApiStaging`
+- `stageProduction`, `stageStaging`
+- `regionProduction`, `regionStaging`
+
+#### 2️⃣ **ProjectAuthApiStack**
+
+Este stack maneja la autenticación de usuarios. Variables de entorno:
+
+- `stage`: "Production" o "Staging"
+- `region`: "us-east-2"
+
+#### 3️⃣ **ProjectTemplateApiStack**
+
+Este stack maneja las plantillas de proyectos. Variables necesarias:
+
+- `userPoolIdProduction`, `userPoolIdStaging`
+- `userPoolClientIdProduction`, `userPoolClientIdStaging`
+- `stageProduction`, `stageStaging`
+- `regionProduction`, `regionStaging`
+
+#### 4️⃣ **ProjectReviewerApiStack**
+
+Este stack maneja las revisiones de proyectos. Variables de entorno necesarias:
+
+- `userPoolIdProduction`, `userPoolIdStaging`
+- `userPoolClientIdProduction`, `userPoolClientIdStaging`
+- `projectTemplateApiProduction`, `projectTemplateApiStaging`
+- `projectInstanceApiProduction`, `projectInstanceApiStaging`
+- `projectAuthApiProduction`, `projectAuthApiStaging`
+- `stageProduction`, `stageStaging`
+- `regionProduction`, `regionStaging`
+- `accountProduction`, `accountStaging`

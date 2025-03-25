@@ -1,5 +1,57 @@
 ---
-title: title
-description: description
-keywords: []
+title: Configuración y Despliegue con AWS CDK
+description: Guía para la configuración y despliegue de la infraestructura en AWS utilizando AWS CDK.
+keywords:
+  [
+    "AWS CDK",
+    "Infraestructura como código",
+    "Despliegue en AWS",
+    "Entornos de producción y pruebas",
+  ]
 ---
+
+📝 Comandos para Desplegar
+
+Para realizar despliegues con CDK, se utilizan los siguientes comandos básicos:
+
+🔹 Inicializar el Proyecto
+
+Si es la primera vez que se usa CDK en la cuenta de AWS, se debe ejecutar:
+
+cdk bootstrap
+
+Este comando configura la cuenta para utilizar CDK y crea los recursos necesarios para el despliegue.
+
+🔹 Revisar Cambios Antes del Despliegue
+
+Antes de desplegar, se recomienda revisar los cambios que se aplicarán:
+
+cdk diff
+
+Este comando muestra una comparación entre la infraestructura actual y la que se va a desplegar.
+
+🔹 Desplegar un Entorno Específico
+
+Para desplegar en el entorno de pruebas (staging):
+
+cdk deploy ProjectInstanceApiStack-Staging
+
+Para desplegar en producción (production):
+
+cdk deploy ProjectInstanceApiStack-Production
+
+Si se requiere desplegar todas las pilas (stacks) al mismo tiempo:
+
+cdk deploy --all
+
+🔹 Eliminar un Despliegue
+
+Si es necesario eliminar recursos, se puede hacer con:
+
+cdk destroy ProjectInstanceApiStack-Staging
+
+O eliminar todas las pilas con:
+
+cdk destroy --all
+
+💡 Recomendación: Siempre verificar el entorno antes de ejecutar cualquier comando de despliegue. En producción, un error puede afectar los datos en uso.

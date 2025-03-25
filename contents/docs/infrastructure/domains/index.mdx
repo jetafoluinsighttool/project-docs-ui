@@ -1,0 +1,48 @@
+---
+title: Configuración de Dominios
+description: Guía para la configuración de dominios en Vercel para Jet Afolu Insight Tool.
+keywords: ["Dominios", "Vercel", "Configuración de Dominios", "CDN", "DNS"]
+---
+
+# 🌐 Configuración de Dominios en Vercel
+
+Jet Afolu Insight Tool utiliza los siguientes dominios para sus distintos entornos y servicios:
+
+- **Documentación**: [https://docs.jetafoluinsighttool.com/](https://docs.jetafoluinsighttool.com/)
+- **Entorno de Pruebas (Staging)**: [https://staging.jetafoluinsighttool.com/](https://staging.jetafoluinsighttool.com/)
+- **Aplicación Principal**: [https://app.jetafoluinsighttool.com/](https://app.jetafoluinsighttool.com/)
+- **Dominio Raíz**: [https://jetafoluinsighttool.com/](https://jetafoluinsighttool.com/)
+
+## 🛠 Configuración en Vercel
+
+Los dominios de Jet Afolu Insight Tool están gestionados a través de **Vercel**, que proporciona hosting y gestión de DNS para el proyecto.
+
+### 📌 Pasos para Configurar un Dominio en Vercel
+
+1. **Acceder a Vercel**
+
+   - Inicia sesión en [Vercel](https://vercel.com/).
+   - Selecciona el proyecto correspondiente.
+
+2. **Agregar el Dominio**
+
+   - Ir a la pestaña **Settings** → **Domains**.
+   - Agregar el dominio personalizado (`jetafoluinsighttool.com` y sus subdominios).
+
+3. **Actualizar Registros DNS**
+
+   - Si el dominio está registrado en un proveedor externo, configurar los registros **CNAME** o **A** según lo indicado por Vercel.
+   - Asegurar que los registros estén apuntando correctamente a Vercel.
+
+4. **Verificar la Configuración**
+
+   - Esperar a que la propagación de DNS se complete (puede tardar hasta 24 horas).
+   - Revisar en Vercel si el dominio aparece como **Verified**.
+
+5. **Habilitar HTTPS**
+   - Vercel asigna automáticamente certificados SSL/TLS.
+   - Verificar que todas las conexiones se realicen a través de `https://`.
+
+---
+
+✅ **Importante**: Cualquier cambio en la configuración de dominios debe realizarse con precaución, ya que puede afectar la accesibilidad de la plataforma.

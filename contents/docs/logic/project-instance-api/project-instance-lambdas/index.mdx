@@ -1,0 +1,49 @@
+---
+title: Funciones Lambda en la Project Instance API
+description: Explicación de las funciones Lambda utilizadas para gestionar la lógica del sistema.
+keywords: ["AWS Lambda", "Node.js", "DynamoDB", "Serverless"]
+---
+
+# ⚡ Funciones Lambda
+
+En la **Project Instance API**, se utilizan **Funciones Lambda de AWS** para procesar las solicitudes de los usuarios y gestionar la lógica del sistema de manera eficiente.
+
+Cada función Lambda se encarga de un aspecto específico del flujo de trabajo y se ejecuta en un entorno **serverless**, lo que permite escalabilidad y optimización de costos.
+
+## 🏗 Estructura de las Funciones
+
+Se han definido **cuatro funciones Lambda principales**, cada una con un propósito específico:
+
+### 🔹 **ProjectInstanceLambda**
+
+- **Propósito:** Gestiona las operaciones relacionadas con las instancias de los proyectos.
+- **Base de datos:** Accede a `ProjectInstanceTable` en DynamoDB para lectura y escritura.
+
+### 🔹 **ModuleInstanceLambda**
+
+- **Propósito:** Maneja los módulos dentro de cada proyecto.
+- **Base de datos:** Se conecta a `ProjectInstanceTable` para almacenar información de los módulos.
+
+### 🔹 **SubModuleInstanceLambda**
+
+- **Propósito:** Procesa las instancias de los submódulos dentro de cada módulo.
+- **Configuración especial:**
+  - Incluye la variable de entorno `STAGE` para diferenciar entre producción y staging.
+  - Utiliza `PROJECT_TEMPLATE_API` para integraciones con plantillas de proyectos.
+  - Tiene un **timeout de 15 segundos** para evitar ejecuciones prolongadas.
+
+### 🔹 **FeedbackInstanceLambda**
+
+- **Propósito:** Administra los datos de retroalimentación de los usuarios dentro de la API.
+- **Base de datos:** Interactúa con `ProjectInstanceTable` para almacenar y recuperar feedback.
+
+## 🔒 Acceso a la Base de Datos
+
+Todas las funciones Lambda tienen **permisos explícitos** para leer y escribir en la tabla **`ProjectInstanceTable`**, lo que garantiza un acceso seguro y eficiente a los datos.
+
+## 🚀 Beneficios del Enfoque
+
+✅ **Escalabilidad automática**, ajustando la cantidad de instancias según la demanda.
+✅ **Optimización de costos**, ya que solo se ejecutan cuando es necesario.
+✅ **Código modular y reutilizable**, con funciones separadas para cada responsabilidad.
+✅ **Integración con DynamoDB**, permitiendo consultas rápidas y eficientes.
