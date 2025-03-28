@@ -2,7 +2,7 @@ import { Paths } from "@/lib/pageroutes"
 
 export const Documents: Paths[] = [
   {
-    title: "📁 documentation",
+    title: "📁 Documentation",
     href: "/documentation",
     heading: "Jet Afolu Insight Tool",
   },
@@ -20,6 +20,23 @@ export const Documents: Paths[] = [
       {
         title: "General structure",
         href: "/general-structure",
+      },
+    ],
+  },
+  {
+    spacer: true,
+  },
+  {
+    title: "📁 Just Transition Indicator®",
+    href: "/just-transition-indicator",
+    items: [
+      {
+        title: "Jti concept",
+        href: "/jti-concept",
+      },
+      {
+        title: "Jti implementation",
+        href: "/jti-implementation",
       },
     ],
   },
@@ -82,8 +99,8 @@ export const Documents: Paths[] = [
           {
             title: "Project instance storage",
             href: "/project-instance-storage",
-          }
-        ]
+          },
+        ],
       },
       {
         title: "Project template-api",
@@ -121,7 +138,7 @@ export const Documents: Paths[] = [
             title: "Project template storage configuration questions",
             href: "/project-template-storage-configuration-questions",
           },
-        ]
+        ],
       },
       {
         title: "Project reviewer api",
@@ -130,10 +147,6 @@ export const Documents: Paths[] = [
       {
         title: "Project auth api",
         href: "/project-auth-api",
-      },
-      {
-        title: "Important links",
-        href: "/important-links",
       },
     ],
   },
@@ -176,23 +189,6 @@ export const Documents: Paths[] = [
       {
         title: "Aws user creation",
         href: "/aws-user-creation",
-      },
-    ],
-  },
-  {
-    spacer: true,
-  },
-  {
-    title: "📁 Just Transition Indicator",
-    href: "/just-transition-indicator",
-    items: [
-      {
-        title: "Jti concept",
-        href: "/jti-concept",
-      },
-      {
-        title: "Jti implementation",
-        href: "/jti-implementation",
       },
     ],
   },
